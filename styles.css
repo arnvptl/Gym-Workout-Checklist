@@ -1,0 +1,48 @@
+html {
+    background: #432E54;
+    color: #e8bcb9;
+    font-family: sans-serif;
+}
+.exercise {
+    margin-bottom: 1rem;
+    padding: 0.5rem;
+    border: 2px solid #ae445a;
+    border-radius: 5px;
+    background: #4B4376;
+  }
+  
+  .inputs {
+    display: flex;
+    gap: 1rem;
+    margin-top: 0.5rem;
+  }
+  
+  .inputs input {
+    width: 45%;
+    padding: 0.5rem;
+    font-size: 1rem;
+    border: 3px solid #ae445a;
+    border-radius: 4px;
+    background: #e8bcb9;
+    color: #ae445a;
+    outline: transparent;
+}   
+  
+  button {
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    color: white;
+    background: #4CAF50;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 1rem;
+  }
+  
+  button:hover {
+    background: #45a049;
+  }
+  input::placeholder {
+    color: #ae445a;
+    opacity: 1; /* For Firefox */
+    }
