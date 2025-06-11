@@ -1,7 +1,7 @@
 # Workout Tracker - Your Gym Companion
 
 Stay on top of your fitness goals with the **Workout Tracker** app! Designed to help you track your workouts and monitor progress, this app makes it easy to log your exercises, weight, and reps while keeping your workout routine organized.
-![Screenshot](https://github.com/arnvptl/Gym-Workout-Checklist/look.png)
+![Screenshot](https://github.com/arnvptl/Gym-Workout-Checklist/blob/main/look.png)
 ## Key Features:
 
 - **Personalized Workout Plans:**  
