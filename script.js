@@ -2,7 +2,7 @@
 const workouts = {
   0: {
     day: "Day 7: Rest or Active Recovery",
-    description: "Light activities: Yoga, swimming, walking, or cycling.",
+    description: "Light activities: Yoga, swimming, walking, or cycling. Focus on mobility, posture drills, and stretching.",
   },
   1: {
     day: "Day 1: Push (Chest, Shoulders, Triceps)",
@@ -20,96 +20,118 @@ const workouts = {
         "Skull Crushers (EZ Bar): 3 sets x 10-12 reps",
         "Cable Rope Pushdowns: 3 sets x 12-15 reps",
       ],
+      "Posture Work": [
+        "Wall Angels: 2 sets x 15 reps",
+        "Doorway Chest Stretch: 2 x 30s each side"
+      ]
     },
   },
   2: {
-    day: "Day 2: Pull (Back, Biceps, Rear Delts)",
+    day: "Day 2: Cardio + Core + Mobility",
+    sections: {
+      "Cardio (Pick One)": [
+        "Treadmill Intervals: 6 rounds – 1 min jog, 2 min walk",
+        "Cycling: 20-30 min at moderate pace",
+        "Stairmaster: 15-20 min"
+      ],
+      "Core Training": [
+        "Hanging Leg Raises: 3 sets x 12 reps",
+        "Cable Crunches: 3 sets x 15 reps",
+        "Plank with Shoulder Taps: 3 sets x 30s"
+      ],
+      "Mobility & Posture": [
+        "Cat-Cow Stretch: 10 reps",
+        "YTWL Raises: 2 rounds",
+        "Chin Tucks: 3 sets x 10 reps"
+      ]
+    }
+  },
+  3: {
+    day: "Day 3: Pull (Back, Biceps, Rear Delts)",
     sections: {
       "Compound Movements": [
-        "Pull-Ups (Weighted if possible): 4 sets x 6-8 reps - Aim for controlled full range of motion.",
-        "Barbell Rows: 4 sets x 8-10 reps - Maintain a flat back and focus on squeezing shoulder blades.",
+        "Pull-Ups: 4 sets x 6-8 reps",
+        "Barbell Rows: 4 sets x 8-10 reps",
       ],
       "Accessory Movements": [
         "Seated Cable Rows: 3 sets x 10-12 reps",
         "Face Pulls: 3 sets x 12-15 reps",
+        "Reverse Pec Deck / Rear Delt Flyes: 3 sets x 15 reps"
       ],
       "Biceps Isolation": [
-        "Barbell Bicep Curls: 3 sets x 10-12 reps",
-        "Incline Dumbbell Curls: 3 sets x 10-12 reps",
+        "Barbell Curls: 3 sets x 10-12 reps",
+        "Incline Dumbbell Curls: 3 sets x 10-12 reps"
       ],
-      Optional: ["Dumbbell Shrugs: 3 sets x 15-20 reps"],
-    },
+      "Posture Work": [
+        "Superman Hold: 3 sets x 30s",
+        "Band Pull-Aparts: 2 sets x 15 reps"
+      ]
+    }
   },
-  3: {
-    day: "Day 3: Legs (Quads, Hamstrings, Glutes, Calves)",
+  4: {
+    day: "Day 4: Legs (Quads, Hamstrings, Glutes, Calves)",
     sections: {
       "Compound Movements": [
-        "Barbell Back Squats: 4 sets x 6-8 reps - Depth is key; go below parallel if flexibility allows.",
-        "Romanian Deadlifts (RDLs): 3 sets x 8-10 reps - Focus on hamstring stretch and hip hinge.",
+        "Barbell Back Squats: 4 sets x 6-8 reps",
+        "Romanian Deadlifts: 3 sets x 8-10 reps",
       ],
       "Accessory Movements": [
         "Leg Press: 4 sets x 10-12 reps",
-        "Walking Dumbbell Lunges: 3 sets x 12 steps per leg",
+        "Walking Lunges: 3 sets x 12 steps per leg",
+        "Hip Thrusts: 3 sets x 12 reps"
       ],
       "Calves Isolation": [
         "Standing Calf Raises: 4 sets x 15-20 reps",
         "Seated Calf Raises: 3 sets x 15-20 reps",
       ],
-    },
-  },
-  4: {
-    day: "Day 4: Push (Variation)",
-    sections: {
-      "Compound Movements": [
-        "Incline Barbell Bench Press: 4 sets x 6-8 reps",
-        "Flat Dumbbell Press: 3 sets x 8-12 reps",
-      ],
-      "Accessory Movements": [
-        "Standing Overhead Barbell Press: 4 sets x 8-10 reps",
-        "Chest Dips (Weighted if possible): 3 sets x 10-12 reps",
-        "Cable Chest Flyes: 3 sets x 12-15 reps",
-      ],
-      "Triceps Isolation": [
-        "Overhead Dumbbell Tricep Extensions: 3 sets x 10-12 reps",
-        "Close-Grip Push-Ups: 3 sets x AMRAP",
-      ],
-    },
+      "Posture/Mobility": [
+        "Hip Flexor Stretch: 2 x 30s/side",
+        "Deep Bodyweight Squats Hold: 2 x 30s"
+      ]
+    }
   },
   5: {
-    day: "Day 5: Pull (Variation)",
+    day: "Day 5: Full Body + Conditioning",
     sections: {
       "Compound Movements": [
-        "Lat Pulldowns: 4 sets x 8-10 reps - Focus on pulling to chest with controlled tempo.",
-        "Dumbbell Rows: 3 sets x 10-12 reps",
+        "Deadlifts: 4 sets x 6 reps",
+        "Push Press: 3 sets x 8 reps",
+        "Dumbbell Lunges: 3 sets x 10/leg",
       ],
       "Accessory Movements": [
-        "Chest-Supported T-Bar Rows: 3 sets x 8-12 reps",
-        "Reverse Flyes: 3 sets x 12-15 reps",
+        "Cable Chest Fly: 3 sets x 12-15 reps",
+        "Lat Pulldown or Pull-ups: 3 sets x 10-12 reps",
+        "T-Bar Row: 3 sets x 10 reps"
       ],
-      "Biceps Isolation": [
-        "Hammer Curls: 3 sets x 10-12 reps",
-        "Concentration Curls: 3 sets x 12-15 reps",
-      ],
-    },
+      "Conditioning Finisher (Pick 1)": [
+        "Farmer's Walk: 3 rounds x 30s heavy",
+        "Battle Ropes: 5 rounds x 30s",
+        "Rowing Machine: 5 min moderate intensity"
+      ]
+    }
   },
   6: {
-    day: "Day 6: Legs (Variation)",
+    day: "Day 6: Light Cardio + Stretch & Posture Focus",
     sections: {
-      "Compound Movements": [
-        "Front Squats: 4 sets x 6-8 reps",
-        "Sumo Deadlifts: 4 sets x 6-8 reps",
+      "Cardio": [
+        "Brisk Walk / Light Jog: 30 min",
+        "Swimming / Cycling (if available): 20–30 min"
       ],
-      "Accessory Movements": [
-        "Bulgarian Split Squats: 3 sets x 10-12 reps per leg",
-        "Leg Extensions (Machine): 3 sets x 12-15 reps",
+      "Full Body Stretch Routine": [
+        "Chest & Shoulder Opener: 2 x 30s",
+        "Hamstring Stretch: 2 x 30s/leg",
+        "Hip Flexor Stretch: 2 x 30s/leg",
+        "Upper Back Stretch on Foam Roller: 2 mins"
       ],
-      "Calves Isolation": [
-        "Donkey Calf Raises (Machine or Weighted): 4 sets x 15-20 reps",
-        "Tibialis Raises: 3 sets x 15-20 reps",
-      ],
-    },
-  },
+      "Posture Work (Daily if possible)": [
+        "Wall Angels: 3 sets x 15 reps",
+        "Face Pulls (light): 3 sets x 15 reps",
+        "Superman Stretch: 3 sets x 30s"
+      ]
+    }
+  }
 };
+
 // Fetch current day
 const today = new Date().getDay();
 
