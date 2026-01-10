@@ -4,10 +4,159 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Gym Workout Checklist</title>
-  <link rel="stylesheet" href="styles.css">
-  <link rel="manifest" href="/manifest.json">
-<meta name="theme-color" content="#000000">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
+    html, body {
+      background: #432E54;
+      color: #e8bcb9;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      min-height: 100vh;
+    }
+
+    header {
+      background: #3a2547;
+      padding: 1.5rem;
+      text-align: center;
+      border-bottom: 3px solid #ae445a;
+      margin-bottom: 2rem;
+    }
+
+    header h1 {
+      margin-bottom: 0.5rem;
+      color: #e8bcb9;
+    }
+
+    header h3 {
+      color: #ae445a;
+      font-weight: normal;
+    }
+
+    main {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 0 1rem 3rem;
+    }
+
+    .description {
+      background: #4B4376;
+      padding: 1.5rem;
+      border-radius: 8px;
+      border: 2px solid #ae445a;
+      font-size: 1.1rem;
+      line-height: 1.6;
+    }
+
+    .section-title {
+      font-size: 1.3rem;
+      font-weight: bold;
+      color: #ae445a;
+      margin: 2rem 0 1rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 2px solid #ae445a;
+    }
+
+    .exercise {
+      margin-bottom: 1rem;
+      padding: 1rem;
+      border: 2px solid #ae445a;
+      border-radius: 8px;
+      background: #4B4376;
+      transition: all 0.2s;
+    }
+
+    .exercise:hover {
+      background: #564b85;
+      transform: translateX(2px);
+    }
+
+    .exercise.completed {
+      opacity: 0.7;
+      background: #3a3560;
+    }
+
+    .exercise label {
+      display: flex;
+      align-items: flex-start;
+      cursor: pointer;
+      font-size: 1rem;
+      line-height: 1.5;
+    }
+
+    .exercise input[type="checkbox"] {
+      margin-right: 0.75rem;
+      margin-top: 0.25rem;
+      cursor: pointer;
+      width: 18px;
+      height: 18px;
+      flex-shrink: 0;
+    }
+
+    .inputs {
+      display: flex;
+      gap: 1rem;
+      margin-top: 0.75rem;
+      margin-left: 2rem;
+    }
+
+    .inputs input {
+      flex: 1;
+      padding: 0.75rem;
+      font-size: 1rem;
+      border: 3px solid #ae445a;
+      border-radius: 6px;
+      background: #e8bcb9;
+      color: #432E54;
+      outline: transparent;
+      font-weight: 600;
+    }
+
+    .inputs input:focus {
+      border-color: #c5566e;
+      box-shadow: 0 0 0 3px rgba(174, 68, 90, 0.2);
+    }
+
+    input::placeholder {
+      color: #ae445a;
+      opacity: 0.7;
+    }
+
+    .reset-btn {
+      display: block;
+      margin: 2rem auto;
+      padding: 0.75rem 2rem;
+      font-size: 1rem;
+      color: white;
+      background: #ae445a;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .reset-btn:hover {
+      background: #c5566e;
+    }
+
+    footer {
+      text-align: center;
+      padding: 2rem 1rem;
+      color: #ae445a;
+      font-style: italic;
+      margin-top: 2rem;
+    }
+
+    @media (max-width: 600px) {
+      .inputs {
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+    }
+  </style>
 </head>
 <body>
   <header>
@@ -16,10 +165,281 @@
   </header>
   <main>
     <section id="workout-container"></section>
+    <button class="reset-btn" onclick="resetProgress()">Reset Today's Progress</button>
   </main>
   <footer>
     <p>Stay consistent and keep pushing your limits!</p>
   </footer>
-  <script src="script.js"></script>
+
+  <script>
+    // Define workout plan with details for each day
+    const workouts = {
+  "0": {
+    "day": "Day 7: Rest or Active Recovery",
+    "description": "Low-intensity recovery to restore nervous system, joints, and posture.",
+    "sections": {
+      "Active Recovery Options": [
+        "Easy Walking: 20–40 min (nasal breathing preferred)",
+        "Swimming or Light Cycling: 20–30 min"
+      ],
+      "Mobility & Tissue Care": [
+        "Thoracic Spine Foam Rolling: 2–3 min",
+        "Hip Flexor Stretch: 2 x 30s/side",
+        "Hamstring Stretch: 2 x 30s/side",
+        "Chest Opener Stretch: 2 x 30s"
+      ],
+      "Posture Micro-Routine": [
+        "Chin Tucks: 3 x 10 reps (5s hold)",
+        "Scapular Setting Holds: 3 x 20s",
+        "Wall Angels: 2 x 15 reps"
+      ]
+    }
+  },
+
+  "1": {
+    "day": "Day 1: Push (Chest, Shoulders, Triceps + Postural Balance)",
+    "sections": {
+      "Compound Movements": [
+        "Barbell Bench Press: 4 x 5–8 reps (RPE 7–8, rest 2–3 min)",
+        "Incline Dumbbell Press: 3 x 8–12 reps (controlled tempo)"
+      ],
+      "Accessory Movements": [
+        "Overhead Dumbbell Shoulder Press: 3 x 8–10 reps",
+        "Incline Dumbbell Flyes: 3 x 10–12 reps",
+        "Lateral Raises: 4 x 12–15 reps (slow eccentric)"
+      ],
+      "Postural Counterbalance (Mandatory)": [
+        "Chest-Supported Dumbbell Rows (Light): 3 x 12–15 reps",
+        "Face Pulls (Light): 2 x 15 reps"
+      ],
+      "Triceps Isolation": [
+        "EZ-Bar Skull Crushers: 3 x 10–12 reps",
+        "Cable Rope Pushdowns: 3 x 12–15 reps"
+      ],
+      "Posture Cooldown": [
+        "Doorway Chest Stretch: 2 x 30s/side",
+        "Thoracic Extension on Foam Roller: 2 min"
+      ]
+    }
+  },
+
+  "2": {
+    "day": "Day 2: Conditioning + Core + Mobility",
+    "sections": {
+      "Primary Conditioning (Pick One)": [
+        "Rowing Machine Intervals: 8 rounds (20s hard / 100s easy)",
+        "Assault Bike Intervals: 8 rounds (20s sprint / 100s easy)",
+        "Incline Treadmill Walk: 25–30 min (nasal breathing)"
+      ],
+      "Core Training": [
+        "Hanging Leg Raises: 3 x 10–12 reps",
+        "Cable Crunches: 3 x 15 reps",
+        "Dead Bug Holds: 3 x 8 reps/side (slow)"
+      ],
+      "Mobility & Posture": [
+        "Cat-Cow: 10 reps",
+        "YTWL Raises: 2 rounds x 8 reps each",
+        "Chin Tucks: 3 x 10 reps"
+      ]
+    }
+  },
+
+  "3": {
+    "day": "Day 3: Pull (Back, Biceps, Rear Delts)",
+    "sections": {
+      "Compound Movements": [
+        "Pull-Ups or Lat Pulldowns: 4 x 6–10 reps",
+        "Barbell Rows: 4 x 8–10 reps (neutral spine)"
+      ],
+      "Accessory Movements": [
+        "Seated Cable Rows (Pause at Retraction): 3 x 10–12 reps",
+        "Face Pulls: 3 x 12–15 reps",
+        "Rear Delt Flyes: 3 x 15 reps"
+      ],
+      "Biceps Isolation": [
+        "Barbell or EZ-Bar Curls: 3 x 10–12 reps",
+        "Incline Dumbbell Curls: 3 x 10–12 reps"
+      ],
+      "Spinal Stability & Posture": [
+        "Bird Dogs: 3 x 8 reps/side (5s hold)",
+        "Band Pull-Aparts: 2 x 20 reps"
+      ]
+    }
+  },
+
+  "4": {
+    "day": "Day 4: Legs (Quads, Hamstrings, Glutes, Calves)",
+    "sections": {
+      "Compound Movements": [
+        "Barbell Back Squats: 4 x 5–8 reps (RPE 7–8)",
+        "Romanian Deadlifts: 3 x 8–10 reps"
+      ],
+      "Accessory Movements": [
+        "Leg Press: 3 x 10–12 reps",
+        "Walking Lunges: 3 x 12 steps/leg",
+        "Hip Thrusts: 3 x 10–12 reps"
+      ],
+      "Calves": [
+        "Standing Calf Raises: 4 x 15–20 reps",
+        "Seated Calf Raises: 3 x 15–20 reps"
+      ],
+      "Mobility & Recovery": [
+        "Hip Flexor Stretch: 2 x 30s/side",
+        "Deep Bodyweight Squat Hold: 2 x 30s"
+      ]
+    }
+  },
+
+  "5": {
+    "day": "Day 5: Full Body + Work Capacity",
+    "sections": {
+      "Primary Lifts (Rotate Weekly)": [
+        "Week A: Conventional Deadlift – 4 x 5 reps",
+        "Week B: Trap Bar Deadlift or RDL – 4 x 6–8 reps"
+      ],
+      "Secondary Compounds": [
+        "Push Press: 3 x 6–8 reps",
+        "Dumbbell Lunges: 3 x 10 reps/leg"
+      ],
+      "Upper Accessory Balance": [
+        "Cable Chest Fly: 3 x 12–15 reps",
+        "Lat Pulldown or Pull-Ups: 3 x 10–12 reps",
+        "T-Bar Row: 3 x 8–10 reps"
+      ],
+      "Conditioning Finisher (Pick One)": [
+        "Farmer’s Walk: 3 rounds x 40s heavy",
+        "Battle Ropes: 6 rounds x 30s",
+        "Rowing Machine: 6 min steady-hard"
+      ]
+    }
+  },
+
+  "6": {
+    "day": "Day 6: Low-Intensity Cardio + Postural Restoration",
+    "sections": {
+      "Cardio": [
+        "Brisk Walk or Easy Jog: 30–40 min (nasal breathing)",
+        "Swimming or Cycling: 20–30 min"
+      ],
+      "Full Body Stretching": [
+        "Chest & Shoulder Opener: 2 x 30s",
+        "Hamstring Stretch: 2 x 30s/leg",
+        "Hip Flexor Stretch: 2 x 30s/leg",
+        "Thoracic Foam Roll Extensions: 2–3 min"
+      ],
+      "Posture Reinforcement": [
+        "Wall Angels: 3 x 15 reps",
+        "Face Pulls (Very Light): 3 x 15 reps",
+        "Scapular Depression Holds (Hanging): 3 x 20s"
+      ]
+    }
+  }
+};
+
+    // Store workout data in memory
+    let workoutData = {};
+
+    // Fetch current day
+    const today = new Date().getDay();
+
+    // Save workout progress to memory
+    function saveWorkoutProgress() {
+      const data = {};
+      document.querySelectorAll(".exercise").forEach((exercise) => {
+        const id = exercise.dataset.id;
+        const weight = exercise.querySelector(".weight").value;
+        const reps = exercise.querySelector(".reps").value;
+        const checked = exercise.querySelector(".completed").checked;
+        data[id] = { weight, reps, checked };
+      });
+      workoutData[`day-${today}`] = data;
+    }
+
+    // Load workout progress from memory
+    function loadWorkoutProgress() {
+      const savedData = workoutData[`day-${today}`] || {};
+      document.querySelectorAll(".exercise").forEach((exercise) => {
+        const id = exercise.dataset.id;
+        if (savedData[id]) {
+          exercise.querySelector(".weight").value = savedData[id].weight;
+          exercise.querySelector(".reps").value = savedData[id].reps;
+          exercise.querySelector(".completed").checked = savedData[id].checked;
+          if (savedData[id].checked) {
+            exercise.classList.add('completed');
+          }
+        }
+      });
+    }
+
+    // Reset progress for today
+    function resetProgress() {
+      if (confirm('Are you sure you want to reset all progress for today?')) {
+        workoutData[`day-${today}`] = {};
+        document.querySelectorAll(".exercise").forEach((exercise) => {
+          exercise.querySelector(".weight").value = '';
+          exercise.querySelector(".reps").value = '';
+          exercise.querySelector(".completed").checked = false;
+          exercise.classList.remove('completed');
+        });
+      }
+    }
+
+    // Display workout for the day
+    document.addEventListener("DOMContentLoaded", () => {
+      const workoutContainer = document.getElementById("workout-container");
+      const dayNameElement = document.getElementById("day-name");
+
+      const workout = workouts[today];
+      dayNameElement.textContent = workout.day;
+
+      if (workout.description) {
+        workoutContainer.innerHTML = `<div class="description">${workout.description}</div>`;
+      } else {
+        Object.keys(workout.sections).forEach((section) => {
+          const sectionTitle = document.createElement("div");
+          sectionTitle.className = "section-title";
+          sectionTitle.textContent = section;
+          workoutContainer.appendChild(sectionTitle);
+
+          workout.sections[section].forEach((exercise, index) => {
+            const exerciseContainer = document.createElement("div");
+            exerciseContainer.classList.add("exercise");
+            exerciseContainer.dataset.id = `${section}-${index}`;
+
+            exerciseContainer.innerHTML = `
+              <label>
+                <input class="completed" type="checkbox"> 
+                <span>${exercise}</span>
+              </label>
+              <div class="inputs">
+                <input class="weight" type="number" placeholder="Weight (kg)" min="0" step="0.5">
+                <input class="reps" type="number" placeholder="Reps" min="0" step="1">
+              </div>
+            `;
+
+            // Add listeners for automatic saving
+            const checkbox = exerciseContainer.querySelector('.completed');
+            checkbox.addEventListener('change', (e) => {
+              if (e.target.checked) {
+                exerciseContainer.classList.add('completed');
+              } else {
+                exerciseContainer.classList.remove('completed');
+              }
+              saveWorkoutProgress();
+            });
+
+            exerciseContainer.querySelectorAll("input[type='number']").forEach((input) =>
+              input.addEventListener("input", saveWorkoutProgress)
+            );
+
+            workoutContainer.appendChild(exerciseContainer);
+          });
+        });
+
+        // Load saved data
+        loadWorkoutProgress();
+      }
+    });
+  </script>
 </body>
 </html>
